@@ -1,4 +1,4 @@
-# finnecto-test-frontend
+# dashboard
 
 ## Project setup
 ```
