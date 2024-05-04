@@ -1,15 +1,16 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <purchase-request-table />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import PurchaseRequestTable from './components/PurchaseRequestTable.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    PurchaseRequestTable
   }
 }
 </script>
