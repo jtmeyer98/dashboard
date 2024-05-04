@@ -23,7 +23,7 @@
     },
     methods: {
       fetchPurchaseRequests() {
-        axios.get('http://localhost:8000/api/purchase_requests/')
+        axios.get('https://api-manager-x6lx.onrender.com/api/purchase_requests/')
           .then(response => {
             this.purchaseRequests = response.data;
           })
