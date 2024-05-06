@@ -36,6 +36,20 @@
         </tr>
       </tbody>
     </table>
+    <!-- Pagination Controls -->
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item" :class="{ disabled: currentPage === 1 }">
+          <a class="page-link" href="#" @click="changePage(currentPage - 1)">Previous</a>
+        </li>
+        <li class="page-item" :class="{ active: page === currentPage }" v-for="page in totalPages" :key="page">
+          <a class="page-link" href="#" @click="changePage(page)">{{ page }}</a>
+        </li>
+        <li class="page-item" :class="{ disabled: currentPage === totalPages }">
+          <a class="page-link" href="#" @click="changePage(currentPage + 1)">Next</a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </template>
 
@@ -46,8 +60,20 @@ export default {
   data() {
     return {
       expanded: null,
-      purchaseRequests: []
+      purchaseRequests: [],
+      currentPage: 1,
+      perPage: 10
     };
+  },
+  computed: {
+    totalPages() {
+      return Math.ceil(this.purchaseRequests.length / this.perPage);
+    },
+    paginatedRequests() {
+      const start = (this.currentPage - 1) * this.perPage;
+      const end = start + this.perPage;
+      return this.purchaseRequests.slice(start, end);
+    }
   },
   mounted() {
     this.fetchPurchaseRequests();
@@ -65,10 +91,16 @@ export default {
         .catch(error => {
           console.error('There was an error fetching the purchase requests:', error);
         });
+    },
+    changePage(page) {
+      if (page > 0 && page <= this.totalPages) {
+        this.currentPage = page;
+      }
     }
   }
 }
 </script>
+
 
 <style>
 .details {
