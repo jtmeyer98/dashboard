@@ -57,8 +57,9 @@ export default {
       this.expanded = this.expanded === id ? null : id;
     },
     fetchPurchaseRequests() {
-      axios.get('http://localhost:8080/api/purchase_requests/')
+      axios.get('https://api-manager-x6lx.onrender.com/api/purchase_requests/')
         .then(response => {
+          console.log('Purchase requests:', response.data);
           this.purchaseRequests = response.data;
         })
         .catch(error => {

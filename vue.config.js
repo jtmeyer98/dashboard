@@ -1,5 +1,4 @@
-module.exports = {
-  devServer: {
-    proxy: 'https://api-manager-x6lx.onrender.com/'
-  }
-};
+const { defineConfig } = require('@vue/cli-service')
+module.exports = defineConfig({
+  transpileDependencies: true
+})
