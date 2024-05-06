@@ -73,6 +73,7 @@ export default {
       expanded: null,
       purchaseRequests: [],
       allRequests: [],
+      filteredRequests: [],
       currentPage: 1,
       perPage: 10,
       pageCount: 0,
@@ -83,18 +84,20 @@ export default {
   },
   methods: {
     fetchPurchaseRequests() {
-      axios.get('https://api-manager-x6lx.onrender.com/api/purchase_requests/')
-        .then(response => {
-          this.allRequests = response.data;
-          this.pageCount = Math.ceil(this.allRequests.length / this.perPage);
-          this.updatePage();
-        })
-        .catch(error => {
-          console.error('There was an error fetching the purchase requests:', error);
-        });
-    },
+    axios.get('https://api-manager-x6lx.onrender.com/api/purchase_requests/')
+      .then(response => {
+        console.log('Purchase requests:', response.data);
+        this.allRequests = response.data;
+        this.filteredRequests = response.data;  // Asegurarse de que filteredRequests también tenga los datos iniciales.
+        this.pageCount = Math.ceil(this.filteredRequests.length / this.perPage);
+        this.updatePage();
+      })
+      .catch(error => {
+        console.error('There was an error fetching the purchase requests:', error);
+      });
+  },
     filterRequests() {
-      let filtered = this.allRequests.filter(request => {
+      this.filteredRequests = this.allRequests.filter(request => {
         return (
           request.requester.toLowerCase().includes(this.filters.requester.toLowerCase()) &&
           request.description.toLowerCase().includes(this.filters.description.toLowerCase()) &&
@@ -103,25 +106,24 @@ export default {
           request.status.toLowerCase().includes(this.filters.status.toLowerCase())
         );
       });
-      this.pageCount = Math.ceil(filtered.length / this.perPage);
+      this.pageCount = Math.ceil(this.filteredRequests.length / this.perPage);
       this.currentPage = 1; // Resetear a la primera página
-      this.updatePage(filtered);
+      this.updatePage();
     },
-    updatePage(filtered = this.allRequests) {
+    updatePage() {
       const start = (this.currentPage - 1) * this.perPage;
       const end = start + this.perPage;
-      this.purchaseRequests = filtered.slice(start, end);
+      this.purchaseRequests = this.filteredRequests.slice(start, end);
     },
     toggleDetails(id) {
       this.expanded = this.expanded === id ? null : id;
     }
   },
   watch: {
-    currentPage() {
-      this.filterRequests();
-      this.updatePage();
-    },
-  }
+  currentPage() {
+    this.updatePage();
+  },
+},
 }
 </script>
 
