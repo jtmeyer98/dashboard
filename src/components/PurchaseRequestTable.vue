@@ -1,5 +1,6 @@
 <template>
   <div class="container mt-5">
+    <h1 class="text-center my-4">Compras realizadas en tu local</h1>
     <table class="table table-hover">
       <thead>
         <tr>
