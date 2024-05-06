@@ -10,6 +10,14 @@
           <th>Estado</th>
           <th>Acciones</th>
         </tr>
+        <tr>
+          <th><input v-model="filters.requester" @input="filterRequests"></th>
+          <th><input v-model="filters.description" @input="filterRequests"></th>
+          <th><input v-model="filters.date" @input="filterRequests"></th>
+          <th><input v-model="filters.type" @input="filterRequests"></th>
+          <th><input v-model="filters.status" @input="filterRequests"></th>
+          <th></th>
+        </tr>
       </thead>
       <tbody>
         <tr v-for="request in purchaseRequests" :key="request.id">
@@ -55,6 +63,13 @@ import axios from 'axios';
 export default {
   data() {
     return {
+      filters: {
+      requester: '',
+      description: '',
+      date: '',
+      type: '',
+      status: ''
+    },
       expanded: null,
       purchaseRequests: [],
       allRequests: [],
@@ -78,10 +93,24 @@ export default {
           console.error('There was an error fetching the purchase requests:', error);
         });
     },
-    updatePage() {
+    filterRequests() {
+      let filtered = this.allRequests.filter(request => {
+        return (
+          request.requester.toLowerCase().includes(this.filters.requester.toLowerCase()) &&
+          request.description.toLowerCase().includes(this.filters.description.toLowerCase()) &&
+          request.date.includes(this.filters.date) &&
+          request.type.toLowerCase().includes(this.filters.type.toLowerCase()) &&
+          request.status.toLowerCase().includes(this.filters.status.toLowerCase())
+        );
+      });
+      this.pageCount = Math.ceil(filtered.length / this.perPage);
+      this.currentPage = 1; // Resetear a la primera página
+      this.updatePage(filtered);
+    },
+    updatePage(filtered = this.allRequests) {
       const start = (this.currentPage - 1) * this.perPage;
       const end = start + this.perPage;
-      this.purchaseRequests = this.allRequests.slice(start, end);
+      this.purchaseRequests = filtered.slice(start, end);
     },
     toggleDetails(id) {
       this.expanded = this.expanded === id ? null : id;
@@ -89,6 +118,7 @@ export default {
   },
   watch: {
     currentPage() {
+      this.filterRequests();
       this.updatePage();
     },
   }
