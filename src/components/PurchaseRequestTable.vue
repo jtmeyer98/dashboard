@@ -58,7 +58,7 @@ export default {
     },
     fetchPurchaseRequests() {
       // axios.get('http://localhost:8000/api/purchase_requests/')
-      axios.get('https://api-manager-x6lx.onrender.com/api/purchase_requests/') // al sacar la s de http, se puede ver el error en la consola del navegador
+      axios.get('http://api-manager-x6lx.onrender.com/api/purchase_requests/') // al sacar la s de http, se puede ver el error en la consola del navegador
         .then(response => {
           this.purchaseRequests = response.data;
         })
