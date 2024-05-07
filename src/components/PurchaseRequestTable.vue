@@ -24,7 +24,7 @@
         <tr v-for="request in purchaseRequests" :key="request.id">
           <td>{{ request.requester }}</td>
           <td>{{ request.description }}</td>
-          <td>{{ request.date }}</td>
+          <td>{{ formatDate(request.date) }}</td>
           <td>{{ request.type }}</td>
           <td>{{ request.status }}</td>
           <td>
@@ -76,7 +76,7 @@ export default {
       allRequests: [],
       filteredRequests: [],
       currentPage: 1,
-      perPage: 10,
+      perPage: 9,
       pageCount: 0,
     };
   },
@@ -118,6 +118,9 @@ export default {
     },
     toggleDetails(id) {
       this.expanded = this.expanded === id ? null : id;
+    },
+    formatDate(date) {
+      return date.split('T')[0];
     }
   },
   watch: {
@@ -129,6 +132,12 @@ export default {
 </script>
 
 <style>
+table th, table td {
+  text-align: left;
+}
+table th, table td {
+  padding-right: 8px;
+}
 .details {
   background-color: #f8f9fa;
   padding: 10px;
