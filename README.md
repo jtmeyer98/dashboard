@@ -15,6 +15,9 @@ Por último, vemos un apartado con los estilos de la tabla.
 - **bootstrap**: Framework de CSS utilizado para el diseño rápido de UI.
 - **vue3**: Framework progresivo para construir interfaces de usuario.
 
+## Para levantar el ambiente localmente:
+1. npm run serve
+
 ## ¿Qué me gustaría agregarle a esta aplicación?
 
 - Un login para el usuario que necesita consultar esta tabla. Probablemente es un administrador de negocio y debemos proteger esta información de las personas naturales.
