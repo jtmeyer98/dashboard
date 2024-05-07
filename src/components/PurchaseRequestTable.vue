@@ -89,7 +89,7 @@ export default {
       .then(response => {
         console.log('Purchase requests:', response.data);
         this.allRequests = response.data;
-        this.filteredRequests = response.data;  // Asegurarse de que filteredRequests también tenga los datos iniciales.
+        this.filteredRequests = response.data;
         this.pageCount = Math.ceil(this.filteredRequests.length / this.perPage);
         this.updatePage();
       })
@@ -108,7 +108,7 @@ export default {
         );
       });
       this.pageCount = Math.ceil(this.filteredRequests.length / this.perPage);
-      this.currentPage = 1; // Resetear a la primera página
+      this.currentPage = 1;
       this.updatePage();
     },
     updatePage() {
