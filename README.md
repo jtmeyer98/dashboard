@@ -1,7 +1,7 @@
 # Nombre del Proyecto Frontend
 
 ## Resumen
-Este es el frontend diseñado para interactuar con el backend de Api-Manager. La vista es simple, una tabla que muestra las solicitudes de compra realizadas por usuarios en la plataforma. La tabla ofrece paginado y filtrado por texto en cada columna. La aplicación fue construida utilizando Vue.js como framework y Render como servidor de despliegue.
+Este es el frontend diseñado para interactuar con el backend de Api-Manager. La vista es simple, una tabla que muestra las solicitudes de compra realizadas por usuarios en la plataforma. La tabla ofrece paginado y filtrado por texto en cada columna. La aplicación fue construida utilizando Vue.js como framework y Render como servidor de despliegue, el cual levantó una instacia de la app en este link: https://dashboard-kxki.onrender.com.
 
 ## Componente PurchaseRequestTable
 Este es el único componente de la aplicación. Es una tabla HTML, la que se compone de encabezados, filtros de texto, registros paginados de 9 en 9, botones para viajar a las páginas vecinas. Además podemos ver que cada orden de compra cuenta con un botón "Detalles", que al apretarse, despliega los articulos comprados por ese usuario.
